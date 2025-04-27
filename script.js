@@ -41,7 +41,7 @@ getData()
 
 // App state
 const state = {
-  mode: 'admin', // 'user' or 'admin'
+  mode: 'user', // 'user' or 'admin'
   currentLevel: 'batch', // 'batch', 'subject', 'chapter', 'video'
   currentBatchId: null,
   currentSubjectId: null,
