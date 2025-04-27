@@ -40,6 +40,7 @@ const removeData = () => {
   localStorage.removeItem(STORAGE_KEYS.SUBJECTS);
   localStorage.removeItem(STORAGE_KEYS.CHAPTERS);
   localStorage.removeItem(STORAGE_KEYS.VIDEOS);
+  localStorage.removeItem(STORAGE_KEYS.THEME);
 }
 
 setData()
