@@ -385,5 +385,6 @@ button:hover {
 
 #switchModeBtn {
   pointer-event: none;
+  pointer-events: none;
   opacity: 0;
 }
