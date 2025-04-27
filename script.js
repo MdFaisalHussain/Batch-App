@@ -35,9 +35,18 @@ const setData = () => {
     }
 }
 
+const removeData = () => {
+  localStorage.removeItem(STORAGE_KEYS.BATCHES);
+  localStorage.removeItem(STORAGE_KEYS.SUBJECTS);
+  localStorage.removeItem(STORAGE_KEYS.CHAPTERS);
+  localStorage.removeItem(STORAGE_KEYS.VIDEOS);
+}
+
 setData()
 
 getData()
+
+removeData()
 
 // App state
 const state = {
