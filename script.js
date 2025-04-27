@@ -585,7 +585,7 @@ function openBatchThenSubjectThenChapter(chapterId, chapterName, subjectId) {
   renderContent();
 }
 
-function playVideo(url) {
+/* function playVideo(url) {
   if (!url) {
     alert('Video URL not available');
     return;
@@ -613,7 +613,98 @@ function playVideo(url) {
   
   
   // window.open(url, '_blank');
+} */
+
+function playVideo(url) {
+  if (!url) {
+    alert('Video URL not available');
+    return;
+  }
+
+  const videoPlayerModal = document.getElementById("videoPlayerModal");
+  const videoPlayer = document.getElementById("videoPlayer");
+
+  // Close any previous hls instance
+  if (window.hlsPlayer) {
+    window.hlsPlayer.destroy();
+    window.hlsPlayer = null;
+  }
+
+  videoPlayer.pause();
+  videoPlayer.src = "";
+
+  if (url.includes("youtube")) {
+    // Open YouTube links in a new tab
+    window.open(url, '_blank');
+    return;
+  }
+
+  if (Hls.isSupported() && url.endsWith(".m3u8")) {
+    // Create new hls.js instance for .m3u8 streaming
+    window.hlsPlayer = new Hls({
+      maxBufferLength: 30,
+      maxMaxBufferLength: 60,
+      lowLatencyMode: true,
+      enableWorker: true,
+      backBufferLength: 90,
+    });
+
+    window.hlsPlayer.loadSource(url);
+    window.hlsPlayer.attachMedia(videoPlayer);
+
+    window.hlsPlayer.on(Hls.Events.MANIFEST_PARSED, function () {
+      videoPlayer.play();
+    });
+
+    window.hlsPlayer.on(Hls.Events.ERROR, function (event, data) {
+      if (data.fatal) {
+        switch (data.type) {
+          case Hls.ErrorTypes.NETWORK_ERROR:
+            console.warn("Network error. Attempting to recover...");
+            window.hlsPlayer.startLoad();
+            break;
+          case Hls.ErrorTypes.MEDIA_ERROR:
+            console.warn("Media error. Attempting to recover...");
+            window.hlsPlayer.recoverMediaError();
+            break;
+          default:
+            console.error("Fatal error. Destroying hls...");
+            window.hlsPlayer.destroy();
+            break;
+        }
+      }
+    });
+  } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+    // Native support (Safari and iOS devices)
+    videoPlayer.src = url;
+    videoPlayer.addEventListener('loadedmetadata', () => {
+      videoPlayer.play();
+    }, { once: true });
+  } else {
+    // Normal MP4 or other direct video files
+    videoPlayer.src = url;
+    videoPlayer.addEventListener('loadedmetadata', () => {
+      videoPlayer.play();
+    }, { once: true });
+  }
+
+  videoPlayerModal.style.display = "flex";
+
+  // Click outside to close
+  videoPlayerModal.onclick = (e) => {
+    if (e.target !== videoPlayerModal) return;
+
+    if (window.hlsPlayer) {
+      window.hlsPlayer.destroy();
+      window.hlsPlayer = null;
+    }
+
+    videoPlayer.pause();
+    videoPlayer.src = "";
+    videoPlayerModal.style.display = "none";
+  }
 }
+
 
 function renderContent() {
   elements.content.innerHTML = '';
