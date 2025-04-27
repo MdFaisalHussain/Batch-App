@@ -45,9 +45,9 @@ const removeData = () => {
 
 setData()
 
-getData()
+// getData()
 
-removeData()
+// removeData()
 
 // App state
 const state = {
