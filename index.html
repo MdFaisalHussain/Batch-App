@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduVidHub - Learning Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1 id="appTitle">Batch - User Mode</h1>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle">
+        <label for="themeSwitch">Dark Mode</label>
+        <input type="checkbox" id="themeSwitch">
+      </div>
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button id="searchBtn">Search</button>
+      </div>
+      <button id="switchModeBtn">Switch to User</button>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" id="breadcrumb">
+    <span id="homeBreadcrumb">Home</span>
+  </nav>
+
+  <main>
+    <div id="content" class="grid-container">
+      <!-- Content will be dynamically loaded here -->
+    </div>
+  </main>
+
+  <!-- Modal for adding/editing content -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add New Item</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="itemName">Name:</label>
+          <input type="text" id="itemName" placeholder="Enter name">
+        </div>
+        <div class="form-group" id="classContainer">
+          <label for="itemClass">Class:</label>
+          <input type="number" id="itemClass" min="1" max="12" placeholder="Enter class (1-12)">
+        </div>
+        <div class="form-group" id="urlContainer" style="display: none;">
+          <label for="itemUrl">Video URL:</label>
+          <input type="url" id="itemUrl" placeholder="Enter video URL">
+        </div>
+        <div class="form-group" id="descContainer" style="display: none;">
+          <label for="itemDesc">Description:</label>
+          <textarea id="itemDesc" placeholder="Enter description"></textarea>
+        </div>
+        <div class="form-group" id="durationContainer" style="display: none;">
+          <label for="itemDuration">Duration (minutes):</label>
+          <input type="number" id="itemDuration" min="1" placeholder="Enter duration">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveBtn">Save</button>
+        <button id="cancelBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin password modal -->
+  <div id="passwordModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Admin Authentication</h2>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="adminPassword">Password:</label>
+          <input type="password" id="adminPassword" placeholder="Enter admin password">
+          <small>Hint: Default password is "admin121"</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="loginBtn">Login</button>
+        <button id="cancelLoginBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="videoPlayerModal" class="modal" style="display: none;">
+    <div id="videoPlayerContent" class="modal-content" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <div class="modal-header">
+        <h2>Video</h2>
+      </div>
+      <div class="modal-body">
+          <video src="" controls id="videoPlayer"></video>
+      </div>
+    </div>
+  </div>
+ 
+  <script src="script.js"></script>
+</body>
+      </html>
