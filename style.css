@@ -384,7 +384,9 @@ button:hover {
 }
 
 #switchModeBtn {
-  pointer-event: none;
+  position: fixed;
+  top: -9999px;
+  left: -555px;
   pointer-events: none;
   opacity: 0;
 }
