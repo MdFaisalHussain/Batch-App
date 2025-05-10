@@ -43,11 +43,11 @@ const removeData = () => {
   localStorage.removeItem(STORAGE_KEYS.THEME);
 }
 
-// setData()
+setData()
 
 // getData()
 
-removeData()
+// removeData()
 
 // App state
 const state = {
